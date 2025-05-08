@@ -1,14 +1,15 @@
-from typing import Optional
-
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app import router as api_router
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Thay "*" bằng URL cụ thể trong production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+app.include_router(api_router, prefix="/api")
