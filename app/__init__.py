@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.api.v1.endpoints import auth, chatbot, advise, quiz, uni_info
+from app.api.v1.endpoints import auth, chatbot, advise, quiz, uni_info, advise
 
 router = APIRouter()
 
@@ -9,3 +9,4 @@ router.include_router(advise.router, prefix = "/advise", tags=["advise"])
 router.include_router(quiz.router, prefix = "/quiz", tags=["quiz"])
 router.include_router(uni_info.router, prefix = "/uni_info", tags=["uni_info"])
 router.include_router(auth.router, prefix="/auth", tags=["auth"])
+router.include_router(advise.router, prefix="/advise", tags=["advise"])
